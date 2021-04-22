@@ -15,6 +15,14 @@ module.exports = {
 		compress: true,
 		port: 9000,
 	},
+	module: {
+		rules: [
+			{
+				test: /\.worker\.js$/,
+				use: { loader: "worker-loader" },
+			},
+		],
+	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: path.resolve(__dirname, "index.html"),
