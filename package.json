@@ -5,8 +5,8 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"build": "webpack --config ./webpack5-polyfill/webpack.config.js",
-		"start": "webpack serve --config ./webpack5-polyfill/webpack.config.js"
+		"build": "webpack --config ./webpack5-asset/webpack.config.js",
+		"start": "webpack serve --config ./webpack5-asset/webpack.config.js"
 	},
 	"type": "module",
 	"keywords": [],
