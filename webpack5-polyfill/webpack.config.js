@@ -4,14 +4,11 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
 	entry: path.resolve(__dirname, "./index.js"),
-	mode: "production",
+	mode: "development",
+	devtool: "inline-source-map",
 	output: {
 		path: path.resolve(__dirname, "./dist"),
-		filename: "[name].[contenthash].js",
-	},
-	optimization: {
-		moduleIds: "deterministic",
-		chunkIds: "deterministic",
+		filename: "main.js",
 	},
 	devServer: {
 		contentBase: path.join(__dirname, "dist"),

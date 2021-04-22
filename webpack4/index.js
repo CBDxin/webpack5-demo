@@ -1,5 +1,8 @@
 import d from "./d.js";
-import Worker from './wasted.time.worker.js';
+import Worker from "./wasted.time.worker.js";
+import cypto from "crypto";
+
+console.log(crypto);
 
 console.log(d);
 
@@ -13,5 +16,5 @@ setTimeout(() => {
 
 const worker = new Worker();
 worker.onmessage = e => {
-  console.log(e.data.value);
+	console.log(e.data.value);
 };
