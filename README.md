@@ -1,7 +1,7 @@
 # webpack5新特新demo
 
 # 变更
-## 1. 持久化缓存
+## 持久化缓存
 在webpack<=4中，我们可以通过`cache-loader`、设置`babel-loader` `option.cacheDirectory`、使用 `hard-source-webpack-plugin`等手段来将编译的结果写入到磁盘中。而在webpack5中，webpack默认会把编译的结果缓存到内存中，同时可以通过添加以下配置，将编译结果缓存到文件系统中：
 ```
 module.exports = {
@@ -30,7 +30,7 @@ ps:
 * 直接通过调用compiler 实例的 run 方法执行构建时，构建缓存最终可能不会生成缓存文件，需要手动调用 `compiler.close()` 来输出缓存文件。
 * [webpack5的持久化缓存和cnpm的安装包名之间有冲突，导致webpack5假死, 无法生成缓存文件](https://github.com/cnpm/cnpm/issues/335)
 
-## 2. 对资源模块提供了内置支持
+## 对资源模块提供了内置支持
 webpack5允许应用使用资源文件（图片，字体等)而不需要配置额外的loader。
 * `asset/resource` 发送一个单独的文件并导出 URL。之前通过使用 file-loader 实现。
 * `asset/inline` 导出一个资源的 data URI。之前通过使用 url-loader 实现。
@@ -66,7 +66,7 @@ module.export = {
 	},
 }
 ```
-## 3. 内置 WebAssembly 编译能力
+## 内置 WebAssembly 编译能力
 Webpack5 提供了 WebAssembly 构建能力，我们只需添加如下配置：
 ```
 module.exports = {
@@ -89,7 +89,7 @@ module.exports = {
 import { sum } from "./sum.wasm";
 console.log(sum(1, 2));
 ```
-## 3. 原生Web Worker 支持
+## 原生Web Worker 支持
 以前若我们想要使用`web worker`，那么我们需要` worker-loader `或 `worker-plugin` 来协助我们：
 ```
 //配置worker-loader
@@ -124,9 +124,9 @@ worker.onmessage = e => {
 };
 ```
 
-## 5. 更友好的 Long Term Cache 支持性
+## 更友好的 Long Term Cache 支持性
 长效缓存特性减少了由于模块变更导致的文件 hash 值的改变而导致文件缓存失效的情况，使得应用可以充分利用浏览器缓存。
-#### 5.1 确定的moduleId 和 chunkId
+#### 确定的moduleId 和 chunkId
 webpack5之前的版本的 moduleId 和 chunkId 默认是自增的，没有从entry打包的chunk都会以1、2、3、4...的递增形式的文件命名方式进行命名。在我们对chunk进行增删操作时，很容易就导致浏览器缓存的失效。
 
 ![image.png](https://upload-images.jianshu.io/upload_images/13434832-99d8ef6366b57cc1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
@@ -150,14 +150,14 @@ optimization.moduleIds = 'named'
 optimization.chunkIds = 'named'
 ```
 
-#### 5.2 真实的content hash
+#### 真实的content hash
 当使用 [contenthash] 时，Webpack 5 将使用真正的文件内容哈希值。也就是说当进行了修改注释或者修改变量名等代码逻辑是没有影响的操作是，文件内容的变更不会导致 contenthash 变化。
 ![image.png](https://upload-images.jianshu.io/upload_images/13434832-ab8fbf05127c695c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 ![image.png](https://upload-images.jianshu.io/upload_images/13434832-2fbd309348e8bc61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 ![image.png](https://upload-images.jianshu.io/upload_images/13434832-43b91399064a99f5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 
 
-## 6. 优化资源打包策略
+## 优化资源打包策略
 [prepack](https://prepack.io/) 能够在编译的时候，将一些无副作用的函数的结果提前计算出来：
 ![image.png](https://upload-images.jianshu.io/upload_images/13434832-33cbacb608f53faf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 webpack5内置了这种能力，能够让你的应用在生产环境下得到极致的优化：
@@ -177,7 +177,7 @@ webpack5内置了这种能力，能够让你的应用在生产环境下得到极
 打包结果：
 ![image.png](https://upload-images.jianshu.io/upload_images/13434832-c0690186a4da7fec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 
-## 7. 更强大的tree shaking
+## 更强大的tree shaking
 tree-shaking能够帮助我们在打包的时候剔除无用的代码。webpack5开启tree-shaking的条件与之前一样，需要使用ES6模块化，并开启production环境。
 ```
 //1.js
@@ -203,7 +203,7 @@ webpack5分析模块的 export 和 import 的依赖关系，去掉未被使用�
 ![image.png](https://upload-images.jianshu.io/upload_images/13434832-5034ea491bbd51f1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 
 
-## 8. Top Level Await
+## Top Level Await
 Webpack5 支持 Top Level Await。简单来说就是可以在顶层的 async 函数外部使用 await 字段。
 举个例子，我们有这么个异步函数a：
 ```
@@ -239,7 +239,7 @@ console.log(res);
 
 ps:该特性只能在ESM中使用。
 
-## 9. 移除了 Node.js Polyfills
+## 移除了 Node.js Polyfills
 webpack <= 4 的版本中提供了许多 Node.js 核心模块的 polyfills，一旦某个模块引用了任何一个核心模块（如 cypto 模块），webpack 就会自动引用这些 polyfills。这会导致应用体积增大，尽管这些polyfills大多是用不上的。
 正常打包的bundle大小：
 
