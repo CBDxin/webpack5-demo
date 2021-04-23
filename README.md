@@ -1,4 +1,4 @@
-# webpack5新特新demo
+# webpack5新特性demo
 
 # 变更
 ## 持久化缓存
