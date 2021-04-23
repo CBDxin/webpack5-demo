@@ -1,6 +1,9 @@
 import d from "./d.js";
 import Worker from "./wasted.time.worker.js";
 import cypto from "crypto";
+import * as two from "./2.js";
+
+console.log(two.one.useful);
 
 console.log(crypto);
 
