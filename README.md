@@ -16,9 +16,11 @@ module.exports = {
 }
 ```
 `filesystem`模式首次打包效果：
+
 ![image.png](https://upload-images.jianshu.io/upload_images/13434832-ddae8c3cdc70390c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 
 filesystem模式二次打包效果：
+
 ![image.png](https://upload-images.jianshu.io/upload_images/13434832-ec7060c6118626ea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 
 
@@ -128,9 +130,11 @@ worker.onmessage = e => {
 webpack5之前的版本的 moduleId 和 chunkId 默认是自增的，没有从entry打包的chunk都会以1、2、3、4...的递增形式的文件命名方式进行命名。在我们对chunk进行增删操作时，很容易就导致浏览器缓存的失效。
 
 ![image.png](https://upload-images.jianshu.io/upload_images/13434832-99d8ef6366b57cc1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
+
 ![image.png](https://upload-images.jianshu.io/upload_images/13434832-45427df15157a90e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 
 ![image.png](https://upload-images.jianshu.io/upload_images/13434832-be20f323411d5fb5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
+
 ![image.png](https://upload-images.jianshu.io/upload_images/13434832-a2f33f8edf90f001.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 
 webpack5为了确保moduleId，chunkId 的确定性， 增加了如下配置（此配置在生产模式下是默认开启）：
@@ -190,10 +194,12 @@ import * as two from "./2.js";
 console.log(two.one.useful);
 ```
 webpack4的打包结果还是会把useless变量打包进来：
+
 ![image.png](https://upload-images.jianshu.io/upload_images/13434832-a6c9dec0dac17c8a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 
 
 webpack5分析模块的 export 和 import 的依赖关系，去掉未被使用的模块，同时结合prepack能力，打包出来的结果十分简洁：
+
 ![image.png](https://upload-images.jianshu.io/upload_images/13434832-5034ea491bbd51f1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 
 
@@ -236,12 +242,17 @@ ps:该特性只能在ESM中使用。
 ## 9. 移除了 Node.js Polyfills
 webpack <= 4 的版本中提供了许多 Node.js 核心模块的 polyfills，一旦某个模块引用了任何一个核心模块（如 cypto 模块），webpack 就会自动引用这些 polyfills。这会导致应用体积增大，尽管这些polyfills大多是用不上的。
 正常打包的bundle大小：
+
 ![image.png](https://upload-images.jianshu.io/upload_images/13434832-17f3547260d2a863.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
+
 引入cypto后：
+
 ![image.png](https://upload-images.jianshu.io/upload_images/13434832-9a934c8a6508037e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 
  webpack 5 开始不再自动填充这些 polyfills，如果你在webpack5中使用到了polyfill：
+
 ![image.png](https://upload-images.jianshu.io/upload_images/13434832-f2733b6964aabca5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
+
 你的应用将会报错，如果你确实是要是要这些模块，控制台中也给你提供了解决的方案，按照控制台的提示去安装对应的包和添加对应的配置就可以了。
 
 # 新特性：
