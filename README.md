@@ -352,7 +352,7 @@ export default Component;
 
 `host`中成功引入了`remote`的组件：
 
-![image.png](https://upload-images.jianshu.io/upload_images/13434832-4522f0693736c143.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
+![image.png](https://upload-images.jianshu.io/upload_images/13434832-14b6436ec0a651d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
 
 不知道大家看到代码有没有很好奇为什么需要通过`index.js` 去动态加载 `bootstrap.js`，如果我们把bootstrap这一层去掉会不会有啥问题呢？我们来把`host`的`entry`直接设置为`"./src/bootstrap"`试试看：
 ![image.png](https://upload-images.jianshu.io/upload_images/13434832-0b1d280c2f257d0e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
